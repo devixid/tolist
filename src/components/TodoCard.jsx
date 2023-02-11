@@ -1,8 +1,10 @@
 /* eslint-disable camelcase */
 import { memo } from "react";
-import Indicator from "@/components/atoms/Indicator";
-import Pen from "@/components/atoms/icons/Pen";
-import Trash from "@/components/atoms/icons/Trash";
+// import Indicator from "@/components/atoms/Indicator";
+// import Pen from "@/components/atoms/icons/Pen";
+// import Trash from "@/components/atoms/icons/Trash";
+
+import { Trash, Pen } from "@/assets";
 
 // eslint-disable-next-line react/prop-types, no-unused-vars
 function TodoCard({ id, title, priority, is_active }) {
@@ -16,7 +18,7 @@ function TodoCard({ id, title, priority, is_active }) {
           data-cy="todo-item-checkbox"
           type="checkbox"
         />
-        <Indicator type={priority} />
+        {/* <Indicator type={priority} /> */}
         <h3
           data-cy="todo-item-title"
           className="text-fontColor-900 font-semibold lg:text-lg "
