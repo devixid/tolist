@@ -2,3 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 @tailwind variants;
+
+@layer components {
+  .container {
+    @apply mx-auto w-full sm:max-w-md md:max-w-lg lg:max-w-4xl xl:max-w-6xl;
+  }
+}

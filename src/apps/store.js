@@ -1,16 +1,18 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
-import { TodoReducers } from "@/service";
+import { ActivityReducers } from "@/service";
 
 const reducers = combineReducers({
-  [TodoReducers.reducerPath]: TodoReducers.reducer,
+  [ActivityReducers.reducerPath]: ActivityReducers.reducer,
 });
 
 const createStore = (options) =>
   configureStore({
     reducer: reducers,
     middleware: (getDefaultMiddleware) => [
-      ...getDefaultMiddleware().concat(TodoReducers.middleware),
+      // ...getDefaultMiddleware().concat(ActivityReducers.middleware),
+      ...getDefaultMiddleware(),
+      ActivityReducers.middleware,
     ],
     devTools: process.env.NODE_ENV !== "production",
     ...options,
