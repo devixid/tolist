@@ -10,3 +10,4 @@ export { ReactComponent as SortUnfinished } from "./svg/unfinished.svg";
 export { ReactComponent as BackButtonIcon } from "./svg/chevron-left.svg";
 export { ReactComponent as Pen } from "./svg/pen.svg";
 export { ReactComponent as React } from "./svg/react.svg";
+export { ReactComponent as Plus } from "./svg/plus.svg";

@@ -1,6 +1,6 @@
 import { memo, Suspense } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { Home, Navbar, Loading } from "@/exports";
+import { Home, Navbar, Loading, TodoDetail } from "@/exports";
 
 function App() {
   const location = useLocation();
@@ -12,6 +12,10 @@ function App() {
         <Route
           path="/"
           element={<Home />}
+        />
+        <Route
+          path="/detail"
+          element={<TodoDetail to="/" />}
         />
         <Route
           path="*"

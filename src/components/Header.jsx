@@ -3,8 +3,13 @@ import { Button } from "@/exports";
 
 function Header() {
   return (
-    <div className="flex items-center justify-around">
-      <h1 data-cy="activity-title">Activity</h1>
+    <div className="flex items-center justify-around p-5">
+      <h1
+        data-cy="activity-title"
+        className="text-4xl font-bold"
+      >
+        Activity
+      </h1>
       <Button />
     </div>
   );
