@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import Button from "./Button";
 import { Danger } from "@/assets";
 
-function ModalAlert({ onClickDelete, onClickCancel, title }) {
+function ModalAlert({ onClickDelete, onClickCancel, title, type }) {
   return (
     <div
       className="fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-25 p-4"
@@ -26,8 +26,9 @@ function ModalAlert({ onClickDelete, onClickCancel, title }) {
           data-cy="modal-delete-title"
           className="px-8 text-center font-normal"
         >
-          Apakah anda yakin ingin menghapus <strong>&quot;{title}&quot;</strong>
-          ?
+          Apakah anda yakin ingin menghapus{" "}
+          {type === "activity" ? "activity" : "List Item"}{" "}
+          <strong>&quot;{title}&quot;</strong>?
         </h3>
 
         <div className="flex h-full w-full items-center justify-center space-x-2 md:space-x-3">
@@ -53,6 +54,7 @@ function ModalAlert({ onClickDelete, onClickCancel, title }) {
 
 ModalAlert.propTypes = {
   title: PropTypes.string,
+  type: PropTypes.oneOf(["list-item", "activity"]).isRequired,
   onClickDelete: PropTypes.func.isRequired,
   onClickCancel: PropTypes.func.isRequired,
 };

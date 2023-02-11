@@ -14,6 +14,12 @@ const activityApi = createApi({
         method: "GET",
       }),
     }),
+    getDetailActivity: builder.query({
+      query: (id) => ({
+        url: `/activity-groups/${id}`,
+        method: "GET",
+      }),
+    }),
     addActivity: builder.mutation({
       query: (body) => ({
         url: "/activity-groups?email=dragdimas9@gmail.com",
@@ -22,8 +28,8 @@ const activityApi = createApi({
       }),
     }),
     editActivity: builder.mutation({
-      query: (body) => ({
-        url: "/activity-groups?email=dragdimas9@gmail.com",
+      query: ({ id, body }) => ({
+        url: `/activity-groups/${id}`,
         method: "PATCH",
         body,
       }),
@@ -39,6 +45,7 @@ const activityApi = createApi({
 
 export const {
   useGetAllActivityQuery,
+  useGetDetailActivityQuery,
   useAddActivityMutation,
   useEditActivityMutation,
   useRemoveActivityMutation,

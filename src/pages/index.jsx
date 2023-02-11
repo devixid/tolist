@@ -61,19 +61,12 @@ function Home() {
       });
   };
 
-  if (activities.length === 0 && isLoading) {
-    return (
-      <div className="container p-4">
-        <p>Loading...</p>
-      </div>
-    );
-  }
-
   return (
     <div className="container p-4">
       <Portal>
         {showModalDelete && (
           <ModalDelete
+            type="activity"
             title={temp?.title}
             onClickCancel={() => {
               setShowModalDelete("");
@@ -108,28 +101,37 @@ function Home() {
         </Button>
       </header>
 
-      {activities.length > 0 ? (
-        <div className="mt-11 flex flex-row flex-wrap gap-4">
-          {activities.map(({ title, id, created_at }) => (
-            <Card
-              key={id}
-              title={title}
-              id={id}
-              created_at={created_at}
-              onClick={() => navigate(`/detail/${id}`)}
-              onClickDelete={() => {
-                setShowModalDelete(true);
-                setTemp({
-                  title,
-                  id,
-                });
-              }}
-              className="w-full sm:max-w-[calc(50%-16px)] lg:max-w-[calc(33.33333%-16px)] xl:max-w-[calc(25%-16px)]"
-            />
-          ))}
+      {activities.length === 0 && isLoading ? (
+        <div className="container p-4">
+          <p>Loading...</p>
         </div>
       ) : (
-        <Figures src="https://devcode-andrianfa-todo-list.web.app/static/media/activity-empty-state.fb319895.png" />
+        // eslint-disable-next-line react/jsx-no-useless-fragment
+        <>
+          {activities.length > 0 ? (
+            <div className="mt-11 flex flex-row flex-wrap gap-4">
+              {activities.map(({ title, id, created_at }) => (
+                <Card
+                  key={id}
+                  title={title}
+                  id={id}
+                  created_at={created_at}
+                  onClick={() => navigate(`/detail/${id}`)}
+                  onClickDelete={() => {
+                    setShowModalDelete(true);
+                    setTemp({
+                      title,
+                      id,
+                    });
+                  }}
+                  className="w-full sm:max-w-[calc(50%-16px)] lg:max-w-[calc(33.33333%-16px)] xl:max-w-[calc(25%-16px)]"
+                />
+              ))}
+            </div>
+          ) : (
+            <Figures src="https://ik.imagekit.io/mlnzyx/devcode-todo/new-activity_OP7NGluCh3.webp?updatedAt=1641870436456" />
+          )}
+        </>
       )}
     </div>
   );

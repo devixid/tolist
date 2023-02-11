@@ -14,6 +14,7 @@ export const Figures = lazy(() => import("@/components/Figures"));
 // Modals
 export { default as ModalDelete } from "@/components/ModalDelete";
 export { default as ModalInfo } from "@/components/ModalInfo";
+export { default as ModalListItem } from "@/components/ModalListItem";
 // export const ModalDelete = lazy(() => import("@/components/ModalDelete"));
 
 // pages
