@@ -1,43 +1,75 @@
-/* eslint-disable camelcase */
 import { memo } from "react";
-// import Indicator from "@/components/atoms/Indicator";
-// import Pen from "@/components/atoms/icons/Pen";
-// import Trash from "@/components/atoms/icons/Trash";
+import PropTypes from "prop-types";
 
 import { Trash, Pen } from "@/assets";
 
-// eslint-disable-next-line react/prop-types, no-unused-vars
-function TodoCard({ id, title, priority, is_active }) {
+function TodoCard({
+  title,
+  priority,
+  is_active,
+  onCheck,
+  onEdit,
+  onDelete,
+  dataCy,
+}) {
   return (
     <div
-      data-cy="todo-item"
-      className="flex h-14 w-full items-center justify-between rounded-lg bg-white px-4 shadow md:h-16 lg:px-8"
+      data-cy={`todo-item-${dataCy}`}
+      className="mb-4 flex h-14 w-full items-center justify-between rounded-lg bg-white px-4 shadow last:mb-0 md:h-16 lg:px-8"
     >
-      <div className="flex h-full w-full items-center space-x-2 lg:space-x-4">
+      <div className="mr-4 flex h-full w-full items-center space-x-2 lg:space-x-4">
         <input
           data-cy="todo-item-checkbox"
           type="checkbox"
+          onChange={onCheck}
+          checked={is_active === 1}
         />
-        {/* <Indicator type={priority} /> */}
+
+        <div
+          className="h-3 w-3 rounded-full"
+          data-cy="todo-item-priority-indicator"
+          style={{
+            background: priority || "#ED4C5C",
+          }}
+        />
+
         <h3
           data-cy="todo-item-title"
-          className="text-fontColor-900 font-semibold lg:text-lg "
+          className={` font-semibold lg:text-lg ${
+            is_active === 1 ? "text-custom-black-100 line-through" : ""
+          }`}
         >
           {title}
         </h3>
 
-        <Pen
-          className="h-5 w-5"
+        <button
+          type="button"
           data-cy="todo-item-edit-button"
-        />
+          onClick={onEdit}
+        >
+          <Pen className="h-5 w-5" />
+        </button>
       </div>
 
-      <Trash
+      <button
+        type="button"
+        onClick={onDelete}
         data-cy="todo-item-delete-button"
-        className="cursor-pointer text-xl text-gray-600 lg:text-2xl"
-      />
+      >
+        <Trash className="cursor-pointer text-xl text-gray-600 lg:text-2xl" />
+      </button>
     </div>
   );
 }
+
+TodoCard.propTypes = {
+  title: PropTypes.string,
+  priority: PropTypes.string.isRequired,
+  is_active: PropTypes.number.isRequired,
+  dataCy: PropTypes.number.isRequired,
+  onCheck: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+};
 
 export default memo(TodoCard);

@@ -5,6 +5,7 @@
 import PropTypes from "prop-types";
 import { memo, useEffect, useState } from "react";
 
+import { priorities } from "@/apps";
 import { Check, ChevronDown, Close } from "@/assets";
 import Button from "./Button";
 
@@ -12,34 +13,6 @@ const newTodoList = {
   title: "",
   priority: "very-high",
 };
-
-const priorities = [
-  {
-    id: "very-high",
-    label: "Very High",
-    color: "#ED4C5C",
-  },
-  {
-    id: "high",
-    label: "High",
-    color: "#F8A541",
-  },
-  {
-    id: "normal",
-    label: "Normal",
-    color: "#00A790",
-  },
-  {
-    id: "low",
-    label: "Low",
-    color: "#428BC1",
-  },
-  {
-    id: "very-low",
-    label: "Very Low",
-    color: "#8942C1",
-  },
-];
 
 function ModalListItem({ data, onSubmit, onClose }) {
   const [formData, setFormData] = useState(newTodoList);
@@ -121,6 +94,7 @@ function ModalListItem({ data, onSubmit, onClose }) {
               data-cy="modal-add-name-input"
               placeholder="Tambahkan nama list item"
               onChange={handleOnChange}
+              value={formData.title}
               autoFocus
             />
           </div>
@@ -160,21 +134,23 @@ function ModalListItem({ data, onSubmit, onClose }) {
               </button>
 
               {isShowDropdown && (
-                <ul
+                <div
                   className="absolute top-0 left-0 z-10 w-full rounded-md border border-custom-white-700 bg-white"
                   data-cy="modal-add-priority-dropdown"
                 >
-                  <li
-                    className="flex flex-row items-center gap-4 bg-custom-white-700 p-4"
+                  <button
+                    type="button"
+                    className="flex w-full flex-row items-center gap-4 bg-custom-white-700 p-4"
                     onClick={() => setShowDropdown((prevState) => !prevState)}
                   >
                     <span>Pilih priority</span>
                     <ChevronDown className="absolute right-4 h-6 w-6 rotate-180" />
-                  </li>
+                  </button>
 
                   {priorities.map(({ id, label, color }) => (
-                    <li
-                      className="flex cursor-pointer flex-row items-center gap-4 border-b border-b-custom-white-700 p-4 last:rounded-md last:border-b-0 hover:bg-custom-white-800"
+                    <button
+                      type="button"
+                      className="flex w-full cursor-pointer flex-row items-center gap-4 border-b border-b-custom-white-700 p-4 last:rounded-md last:border-b-0 hover:bg-custom-white-800"
                       onClick={() => handleSetPriority(id)}
                       key={id}
                       data-cy={`modal-add-priority-${id}`}
@@ -189,16 +165,21 @@ function ModalListItem({ data, onSubmit, onClose }) {
                       {formData.priority === id && (
                         <Check className="absolute right-4 h-6 w-6" />
                       )}
-                    </li>
+                    </button>
                   ))}
-                </ul>
+                </div>
               )}
             </div>
           </div>
         </div>
 
         <footer className="flex justify-end border-t border-t-custom-white-700 py-6 px-4 md:px-6">
-          <Button type="submit">Simpan</Button>
+          <Button
+            type="submit"
+            data-cy="modal-add-save-button"
+          >
+            Simpan
+          </Button>
         </footer>
       </form>
     </div>

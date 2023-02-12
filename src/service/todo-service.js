@@ -21,9 +21,34 @@ const todoApi = createApi({
         body,
       }),
     }),
+    getTodoDetail: builder.mutation({
+      query: (id) => ({
+        url: `/todo-items/${id}`,
+        method: "GET",
+      }),
+    }),
+    updateTodo: builder.mutation({
+      query: (body) => ({
+        url: `/todo-items/${body.id}`,
+        method: "PATCH",
+        body,
+      }),
+    }),
+    deleteTodo: builder.mutation({
+      query: (id) => ({
+        url: `/todo-items/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
-export const { useGetAllTodoQuery, useCreateTodoMutation } = todoApi;
+export const {
+  useGetAllTodoQuery,
+  useCreateTodoMutation,
+  useGetTodoDetailMutation,
+  useUpdateTodoMutation,
+  useDeleteTodoMutation,
+} = todoApi;
 
 export default todoApi;
